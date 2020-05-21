@@ -1,37 +1,22 @@
-import sys
 import zmq
 
-port = "5556"
-if len(sys.argv) > 1:
-    port =  sys.argv[1]
-    int(port)
 
-if len(sys.argv) > 2:
-    port1 =  sys.argv[2]
-    int(port1)
+# if len(sys.argv) > 2:
+#    socket.connect ("tcp://localhost:%s" % port1)
 
-# Socket to talk to server
-context = zmq.Context()
-socket = context.socket(zmq.SUB)
 
-print( "Collecting updates from weather server..." )
-socket.connect ("tcp://localhost:%s" % port)
+def zmq_read(port):
+    # Socket to talk to server
+    context = zmq.Context()
 
-if len(sys.argv) > 2:
-    socket.connect ("tcp://localhost:%s" % port1)
+    socket = context.socket(zmq.SUB)
+    socket.connect("tcp://localhost:%s" % port)
+    topicfilter = b"ADC"
+    socket.setsockopt(zmq.SUBSCRIBE, topicfilter)
+    string = socket.recv()
+    string = string.decode('utf-8')
 
-# Subscribe to zipcode, default is NYC, 10001
-topicfilter = b"10001"
-socket.setsockopt(zmq.SUBSCRIBE, topicfilter)
+    return string
 
-# Process 5 updates
-total_value = 0
-for update_nbr in range (5):
-    string = str(socket.recv())
-    print(string)
-    topic, messagedata = string.split('_')
-    #total_value += int(messagedata)
-    print( topic, messagedata )
-
-#print( "Average messagedata value for topic '%s' was %dF" % (topicfilter, total_value / update_nbr) )
-
+#    with open('filename.txt', "a") as g:
+#        g.write("%s\n" % string)  # Записываем имена файлов в текстовый файл
