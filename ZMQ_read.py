@@ -8,7 +8,6 @@ import zmq
 def zmq_read(port):
     # Socket to talk to server
     context = zmq.Context()
-
     socket = context.socket(zmq.SUB)
     socket.connect("tcp://localhost:%s" % port)
     topicfilter = b"ADC"

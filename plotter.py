@@ -1,7 +1,6 @@
 
 # !/usr/bin/env python
 from matplotlib.ticker import NullFormatter  # useful for `logit` scale
-
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 import numpy as np

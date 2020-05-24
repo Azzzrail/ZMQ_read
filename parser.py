@@ -28,3 +28,4 @@ def parse(string):
 #    module_serial = re.search(r"\b\w{8}\b", split_string[0])
 #    event_number = re.search(r"Ev_\d+;", split_string[0])
 #    module_type= re.search(r"\b\w{3}\b", split_string[0])
+

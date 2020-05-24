@@ -6,8 +6,8 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import PySimpleGUI as sg
 import matplotlib
 matplotlib.use('TkAgg')
-from matplotlib.figure import Figure
-import matplotlib.pyplot as plt
+#from matplotlib.figure import Figure
+#import matplotlib.pyplot as plt
 
 
 input_field_1: int
