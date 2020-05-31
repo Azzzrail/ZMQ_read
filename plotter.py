@@ -90,8 +90,8 @@ def histogrammer(input_data):
     #
 
     fig = matplotlib.figure.Figure(figsize=(8, 6), dpi=100)
-    t = np.arange(0, 3, .01)
     fig.add_subplot(111).plot(x, y)
+
 
     # ------------------------------- END OF YOUR MATPLOTLIB CODE -------------------------------
     return fig

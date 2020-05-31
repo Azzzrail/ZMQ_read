@@ -1,14 +1,16 @@
 import PySimpleGUIQt as sgQT
-#import PySimpleGUI as sg
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-import matplotlib.animation as animation
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import PySimpleGUI as sg
+import sys
+import random
 import matplotlib
-matplotlib.use('TkAgg')
-#from matplotlib.figure import Figure
-#import matplotlib.pyplot as plt
+from PyQt5 import QtCore, QtWidgets
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+from matplotlib.figure import Figure
 
+matplotlib.use('Qt5Agg')
+
+# from matplotlib.figure import Figure
+# import matplotlib.pyplot as plt
 
 input_field_1: int
 
@@ -19,11 +21,11 @@ def ask_port():
     # All the stuff inside your window.
     layout = [[sgQT.Text('TEST_TEST_TEST')],
               # кнопка для выбора папки с файлами
-              #[sg.T('Source Folder')], [sg.In(key='input')], [sg.FolderBrowse(target='input')],
+              # [sg.T('Source Folder')], [sg.In(key='input')], [sg.FolderBrowse(target='input')],
               # Поле для ввода номера канала
               [sgQT.Text('Enter port number'), sgQT.InputText()],
 
-              #[sg.Text('Plot tools enable/disable')],
+              # [sg.Text('Plot tools enable/disable')],
               # чербоксы для работы с нарисованной гистограммой
               # [sg.Checkbox('pan', default=True), sg.Checkbox('wheel_zoom', default=True),
               # sg.Checkbox('box_zoom', default=True), sg.Checkbox('reset', default=True),
@@ -47,22 +49,20 @@ def ask_port():
 
     window.close()
 
-
     try:
         return input_field_1
     except NameError:
         return None
 
 
-def dwraw_plot_window(fig):
-    #print(fig)
+def draw_plot_window():
 
-    # ------------------------------- Beginning of Matplotlib helper code -----------------------
+#------------------------------- Beginning of Matplotlib helper code -----------------------
 
     def draw_figure(canvas, figure):
-        figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
+        figure_canvas_agg = FigureCanvasQTAgg(figure)
         figure_canvas_agg.draw()
-        figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
+        #figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
         return figure_canvas_agg
 
     # ------------------------------- Beginning of GUI CODE -------------------------------
@@ -77,9 +77,10 @@ def dwraw_plot_window(fig):
                        element_justification='center', font='Helvetica 18')
 
     # add the plot to the window
-    fig_canvas_agg = draw_figure(window['-CANVAS-'].TKCanvas, fig)
+    #fig_canvas_agg = draw_figure(window['-CANVAS-'].TKCanvas, fig)
 
     event, values = window.read()
     #ani = animation.FuncAnimation(fig, draw_figure, frames=30)
     #window.close()
+
     return

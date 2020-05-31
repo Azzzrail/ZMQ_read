@@ -1,5 +1,7 @@
 import sys
 import matplotlib.pyplot as plt
+from PyQt5 import QtCore, QtWidgets
+#import test as test
 import gui as gui  # импортируем самописные модули
 import ZMQ_read as socket
 import parser as parser
@@ -20,16 +22,11 @@ if len(sys.argv) > 2:
 
 port = gui.ask_port()
 print(port)
+#test()
 
 while True:
     input_data = socket.zmq_read(port)
+    print(input_data)
     plot_data, event_header = parser.parse(input_data)
     print(plot_data)
     plot_figure = plotter.histogrammer(plot_data)
-    #print(plot_data)
-    gui.dwraw_plot_window(plot_figure)
-    #fig.canvas.draw()
-    #print(plot_data)
-#    plt.clf()
-
-    # print(input_data)
